@@ -5,6 +5,22 @@
     <title th:text = "${title}"></title>
 </head>
 <body>
-    <p th:text = "'Hello!' +  ${title}"></p>
+
+<form action="/add" form method="post">
+    <label for="number">number:</label>
+    <input type="text" id="number" name="number"><br><br>
+
+    <label for="model">model:</label>
+    <input type="text" id="model" name="model"><br><br>
+
+    <label for="mark">mark:</label>
+    <input type="text" id="mark" name="mark"><br><br>
+
+    <label for="garageId">garageId:</label>
+    <input type="text" id="garageId" name="garageId"><br><br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>
+
+
