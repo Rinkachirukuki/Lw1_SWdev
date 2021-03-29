@@ -1,7 +1,14 @@
 package com.SoftwareDevelopment.TrComp.controllers;
 
+import com.SoftwareDevelopment.TrComp.models.Customer;
+import com.SoftwareDevelopment.TrComp.models.Order;
 import com.SoftwareDevelopment.TrComp.models.Vehicle;
+import com.SoftwareDevelopment.TrComp.repositories.CustomerRepository;
+import com.SoftwareDevelopment.TrComp.repositories.OrderRepository;
 import com.SoftwareDevelopment.TrComp.repositories.VehicleRepository;
+import com.SoftwareDevelopment.TrComp.services.CustomerService;
+import com.SoftwareDevelopment.TrComp.services.OrderService;
+import com.SoftwareDevelopment.TrComp.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Controller;
@@ -18,24 +25,33 @@ import javax.persistence.criteria.CriteriaBuilder;
 @RequestMapping
 public class MainController {
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleService;
+    @Autowired
+    private CustomerRepository customerService;
+    @Autowired
+    private OrderRepository orderService;
 
     @PostMapping(path= "/add")
     public @ResponseBody String addNewVehicle(@RequestParam String number, @RequestParam String model, @RequestParam String mark,@RequestParam Integer garageId) {
 
-        Vehicle n = new Vehicle();
-        n.setNumber(number);
-        n.setModel(model);
-        n.setMark(mark);
-        if (garageId != null)
-            n.setGarageId(garageId);
-        vehicleRepository.save(n);
+        Order n = new Order();
+        n.setId(1);
+        n.setVehicle(vehicleService.findById(1).get());
+        n.setCustomer(customerService.findById(1).get());
+        n.setDestinationPoint("dest point");
+        n.setStartPoint("start point");
+        n.setPrice(100);
+        orderService.save(n);
         return "Saved";
     }
+
+    /*
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Vehicle> getAllVehicles(){
-        return  vehicleRepository.findAll();
+        return  vehicleService.findAll();
     }
+
+     */
 }
 
 

@@ -1,7 +1,6 @@
 package com.SoftwareDevelopment.TrComp.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.SoftwareDevelopment.TrComp.models.Vehicle;
 
-public interface VehicleRepository extends
-CrudRepository<Vehicle, Integer> { }
+public interface VehicleRepository extends JpaRepository<Vehicle, Integer> { }
