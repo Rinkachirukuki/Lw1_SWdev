@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Список автомобилей</title>
+</head>
+<body>
+<div class="container">
+
+    <h3>Список автомобилей</h3>
+    <hr>
+    <a th:href="@{/vehicle/add}"
+       class="btn btn-primary btn-sm mb-3"> Добавить автомобиль </a>
+    <br/>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Номер</th>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Действия</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempVehicle : ${vehicles}">
+
+            <td th:text="${tempVehicle.id}" />
+            <td th:text="${tempVehicle.number}" />
+            <td th:text="${tempVehicle.mark.getName()}" />
+            <td th:text="${tempVehicle.model}" />
+            <td>
+                <a th:href="@{/vehicle/update (id=${tempVehicle.id})}"
+                    class="btn btn-info btn-sm">Обновить</a>
+                <a th:href="@{/vehicle/delete (id=${tempVehicle.id})}"
+                   class="btn btn-warning btn-sm"
+                   onclick="if (!(confirm('Удалить?'))) return false">Удалить</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    <hr>
+    <a th:href="@{/}">В главное меню</a>
+
+</div>
+</body>
+</html>

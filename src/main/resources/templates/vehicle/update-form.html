@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Обновить информацию об автомобиле</title>
+</head>
+
+<body>
+<div class="container">
+    <h3>Факультеты</h3>
+    <hr>
+
+    <p class="h4 mb-4">Обновить информацию об автомобиле</p>
+
+    <form action="#" th:action="@{/vehicle/save}" th:object="${vehicle}"
+          method="POST">
+
+        <input type="hidden" th:field="*{id}">
+
+        <input type="text" th:field="*{number}" class="form-control mb-4 col-4"
+               placeholder="Номер" required>
+
+        <input type="text" th:field="*{model}" class="form-control mb-4 col-4"
+               placeholder="Модель" required>
+
+        <select class="form-control selectpicker mb-4 col-4" th:field="*{mark}" name="mark">
+            <option th:each="tempMark : ${markList}"
+                    th:value="${tempMark.name}"
+                    th:text="${tempMark.name}">
+            </option>
+        </select>
+
+        <select class="form-control selectpicker mb-4 col-4" th:field="*{driver}" name="driverId">
+            <option th:each="tempDriver : ${driverList}"
+                    th:value="${tempDriver.id}"
+                    th:text="${tempDriver.toString()}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-warning col-2">Сохранить</button>
+    </form>
+    <hr>
+    <a th:href="@{/vehicle/list}">К списку автомобилей</a>
+</div>
+</body>
+
+</html>

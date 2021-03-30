@@ -14,6 +14,13 @@ public class Vehicle {
     public Vehicle() {
     }
 
+    public Vehicle(String number, String model, Mark mark, Driver driver) {
+        this.number = number;
+        this.model = model;
+        this.mark = mark;
+        this.driver = driver;
+    }
+
     public Integer getId() {
         return id;
     }
