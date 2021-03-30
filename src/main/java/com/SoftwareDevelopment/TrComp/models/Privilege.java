@@ -10,7 +10,6 @@ import java.util.List;
 public class Privilege {
     @Id
     @Column(name = "privilege_name")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     @Column(name = "discount_size")

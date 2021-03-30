@@ -39,7 +39,7 @@ public class Customer {
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "customer",
             cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
             })
-    private List<Order> orders;
+    private List<TaxiOrder> taxiOrders;
 
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "customer",
             cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
@@ -105,12 +105,12 @@ public class Customer {
         this.achievements = achievements;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<TaxiOrder> getOrders() {
+        return taxiOrders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<TaxiOrder> taxiOrders) {
+        this.taxiOrders = taxiOrders;
     }
 
     public List<Review> getReviews() {

@@ -1,9 +1,6 @@
 package com.SoftwareDevelopment.TrComp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -57,12 +54,12 @@ public class Vehicle {
         this.driver = driver;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<TaxiOrder> getOrders() {
+        return taxiOrders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<TaxiOrder> taxiOrders) {
+        this.taxiOrders = taxiOrders;
     }
 
     @Column(name = "number")
@@ -82,6 +79,6 @@ public class Vehicle {
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "vehicle",
             cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
             })
-    private List<Order> orders;
+    private List<TaxiOrder> taxiOrders;
 
 }

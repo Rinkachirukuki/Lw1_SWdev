@@ -7,7 +7,6 @@ import java.util.List;
 public class Gender {
     @Id
     @Column(name = "gender_name")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "gender",

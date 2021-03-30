@@ -8,7 +8,6 @@ import java.util.List;
 public class Mark {
     @Id
     @Column(name = "mark_name")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "mark",

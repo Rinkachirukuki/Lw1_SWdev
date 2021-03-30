@@ -3,7 +3,7 @@ package com.SoftwareDevelopment.TrComp.models;
 import javax.persistence.*;
 
 @Entity
-public class Order {
+public class TaxiOrder {
     @Id
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Order() {
+    public TaxiOrder() {
     }
 
     public Integer getId() {
