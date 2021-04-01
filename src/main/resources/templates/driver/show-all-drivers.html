@@ -11,35 +11,38 @@
 <body>
 <div class="container">
 
-    <h3>Автомобили</h3>
+    <h3>Водители</h3>
     <hr>
-    <a th:href="@{/vehicle/add}"
-       class="btn btn-primary btn-sm mb-3"> Добавить автомобиль </a>
+    <a th:href="@{/driver/add}"
+       class="btn btn-primary btn-sm mb-3"> Добавить водителя </a>
     <br/>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
             <th>ID</th>
-            <th>Номер</th>
-            <th>Марка</th>
-            <th>Модель</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Пол</th>
             <th>Действия</th>
+
 
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="tempVehicle : ${vehicles}">
+        <tr th:each="tempDriver : ${drivers}">
 
-            <td th:text="${tempVehicle.id}" />
-            <td th:text="${tempVehicle.number}" />
-            <td th:text="${tempVehicle.mark.name}" />
-            <td th:text="${tempVehicle.model}" />
+            <td th:text="${tempDriver.id}" />
+            <td th:text="${tempDriver.lastName}" />
+            <td th:text="${tempDriver.firstName}" />
+            <td th:text="${tempDriver.patronymic}" />
+            <td th:text="${tempDriver.gender.name}" />
             <td>
-                <a th:href="@{/vehicle/update (id=${tempVehicle.id})}"
+                <a th:href="@{/driver/update (id=${tempDriver.id})}"
                     class="btn btn-info btn-sm">Обновить</a>
-                <a th:href="@{/vehicle/delete (id=${tempVehicle.id})}"
+                <a th:href="@{/driver/delete (id=${tempDriver.id})}"
                    class="btn btn-warning btn-sm"
                    onclick="if (!(confirm('Удалить?'))) return false">Удалить</a>
             </td>
@@ -50,26 +53,26 @@
     </table>
 
 
-    <nav aria-label="Pagination" th:if="${vehicles.totalPages gt 0}">
+    <nav aria-label="Pagination" th:if="${drivers.totalPages gt 0}">
         <ul class="pagination justify-content-center font-weight-bold">
 
-            <li class="page-item" th:classappend="${vehicles.number eq 0} ? 'disabled'">
+            <li class="page-item" th:classappend="${drivers.number eq 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/vehicle/list (pageNumber=${vehicles.number lt 2 ? 1 : vehicles.number},pageSize=${vehicles.size})}"
+                   th:href="@{/driver/list (pageNumber=${drivers.number lt 2 ? 1 : drivers.number},pageSize=${drivers.size})}"
                    aria-label="Previous" title="Previous Page" data-toggle="tooltip">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
-            <li class="page-item" th:classappend="${i eq vehicles.number + 1} ? 'active'"
-                th:each="i : ${#numbers.sequence( 1, vehicles.totalPages, 1)}">
-                <a class="page-link" th:href="@{/vehicle/list (pageNumber=${i},pageSize=${vehicles.size})}" th:text="${i}"
+            <li class="page-item" th:classappend="${i eq drivers.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, drivers.totalPages, 1)}">
+                <a class="page-link" th:href="@{/driver/list (pageNumber=${i},pageSize=${drivers.size})}" th:text="${i}"
                    th:title="${'Page '+ i}" data-toggle="tooltip"></a>
             </li>
 
-            <li class="page-item" th:classappend="${vehicles.number + 1 eq vehicles.totalPages} ? 'disabled'">
+            <li class="page-item" th:classappend="${drivers.number + 1 eq drivers.totalPages} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/vehicle/list (pageNumber=${vehicles.number + 2},pageSize=${vehicles.size})}"
+                   th:href="@{/driver/list (pageNumber=${drivers.number + 2},pageSize=${drivers.size})}"
                    aria-label="Next" title="Next Page" data-toggle="tooltip">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
@@ -79,11 +82,11 @@
     </nav>
     <div class="container" align="right">
         Записей на странице:
-        <a class="text-end" th:href="@{/vehicle/list (pageNumber=${vehicles.number + 1}, pageSize=5)}"
+        <a class="text-end" th:href="@{/driver/list (pageNumber=${drivers.number + 1}, pageSize=5)}"
            th:text="5"></a>
-        <a class="text-end" th:href="@{/vehicle/list (pageNumber=${vehicles.number + 1}, pageSize=10)}"
+        <a class="text-end" th:href="@{/driver/list (pageNumber=${drivers.number + 1}, pageSize=10)}"
            th:text="10"></a>
-        <a class="text-end" th:href="@{/vehicle/list (pageNumber=${vehicles.number + 1}, pageSize=15)}"
+        <a class="text-end" th:href="@{/driver/list (pageNumber=${drivers.number + 1}, pageSize=15)}"
            th:text="15"></a>
     </div>
 

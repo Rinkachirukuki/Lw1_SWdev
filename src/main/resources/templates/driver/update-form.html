@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Обновить информацию о водителе</title>
+</head>
+
+<body>
+<div class="container">
+    <h3>Водители</h3>
+    <hr>
+
+    <p class="h4 mb-4">Обновить информацию о водителе</p>
+
+    <form action="#" th:action="@{/driver/save}" th:object="${driver}"
+          method="POST">
+
+        <input type="hidden" th:field="*{id}">
+
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4"
+               placeholder="Фамилия" required>
+
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4"
+               placeholder="Имя" required>
+
+        <input type="text" th:field="*{patronymic}" class="form-control mb-4 col-4"
+               placeholder="Отчество" required>
+
+        <select class="form-control selectpicker mb-4 col-4" th:field="*{gender}" name="gender">
+            <option th:each="tempGender : ${genderList}"
+                    th:value="${tempGender.name}"
+                    th:text="${tempGender.name}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-warning col-2">Сохранить</button>
+    </form>
+    <hr>
+    <a th:href="@{/driver/list}">К списку водителей</a>
+</div>
+</body>
+
+</html>

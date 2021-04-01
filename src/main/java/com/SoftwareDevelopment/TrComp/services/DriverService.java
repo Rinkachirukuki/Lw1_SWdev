@@ -41,5 +41,9 @@ public class DriverService {
     public void save(Driver driver) {
         driverRepository.save(driver);
     }
+
+    public void deleteById(Integer id){
+        driverRepository.deleteById(id);
+    }
 }
 

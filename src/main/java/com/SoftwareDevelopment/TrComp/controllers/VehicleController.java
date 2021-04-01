@@ -1,15 +1,15 @@
 package com.SoftwareDevelopment.TrComp.controllers;
 
-import com.SoftwareDevelopment.TrComp.models.Driver;
-import com.SoftwareDevelopment.TrComp.models.Mark;
-import com.SoftwareDevelopment.TrComp.models.TaxiOrder;
 import com.SoftwareDevelopment.TrComp.models.Vehicle;
 import com.SoftwareDevelopment.TrComp.services.DriverService;
 import com.SoftwareDevelopment.TrComp.services.MarkService;
 import com.SoftwareDevelopment.TrComp.services.VehicleService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.print.PageFormat;
 
 
 @Controller
@@ -25,26 +25,11 @@ public class VehicleController {
     private VehicleService vehicleService;
     private MarkService markService;
     private DriverService driverService;
-/*
-    @PostMapping(path= "/add")
-    public @ResponseBody
-    String addNewVehicle(@RequestParam String number, @RequestParam String model, @RequestParam String mark, @RequestParam Integer driverId, @RequestParam Integer garageId) {
-
-        Mark c_mark = markService.findById(mark);
-        Driver driver = driverService.findById(driverId);
-
-        Vehicle n = new Vehicle(number,model,c_mark,driver);
-
-        vehicleService.save(n);
-        return "Saved";
-    }
-    */
-
 
     @GetMapping("/list")
-    public String showAllVehicles(Model model){
+    public String showAllVehicles(Pageable page, Model model){
 
-        model.addAttribute("vehicles",vehicleService.findAll());
+        model.addAttribute("vehicles",vehicleService.findAll(page));
 
         return "vehicle/show-all-vehicles.html";
     }
@@ -71,7 +56,7 @@ public class VehicleController {
     }
 
     @GetMapping("/add")
-    public String vehicleAdd( Model model) {
+    public String vehicleAdd(Model model) {
 
         Vehicle vehicle = new Vehicle();
 
