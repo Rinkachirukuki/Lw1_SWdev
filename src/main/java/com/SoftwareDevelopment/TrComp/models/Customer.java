@@ -120,4 +120,23 @@ public class Customer {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
+    @PreRemove
+    private void preRemove() {
+        gender.getCustomers().remove(this);
+        privilege.getCustomers().remove(this);
+        for (Achievement s : achievements){
+            s.getCustomers().remove(this);
+        }
+        for (TaxiOrder s : taxiOrders){
+            s.setCustomer(null);
+        }
+        for (Achievement s : achievements){
+            s.getCustomers().remove(this);
+        }
+        for (Review s : reviews){
+            s.setCustomer(null);
+        }
+}
+
 }

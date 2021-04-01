@@ -33,4 +33,11 @@ public class Mark {
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
+
+    @PreRemove
+    private void preRemove() {
+        for (Vehicle s : vehicles) {
+            s.setMark(null);
+        }
+    }
 }

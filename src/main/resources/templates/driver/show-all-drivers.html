@@ -38,7 +38,7 @@
             <td th:text="${tempDriver.lastName}" />
             <td th:text="${tempDriver.firstName}" />
             <td th:text="${tempDriver.patronymic}" />
-            <td th:text="${tempDriver.gender.name}" />
+            <td th:text="${tempDriver.gender} ? ${tempDriver.gender.name} : 'Не указано'" />
             <td>
                 <a th:href="@{/driver/update (id=${tempDriver.id})}"
                     class="btn btn-info btn-sm">Обновить</a>

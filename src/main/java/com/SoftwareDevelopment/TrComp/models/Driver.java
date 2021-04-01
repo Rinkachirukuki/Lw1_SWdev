@@ -96,4 +96,15 @@ public class Driver {
     public String toString() {
         return lastName+ " " + firstName + " " + patronymic;
     }
+
+    @PreRemove
+    private void preRemove() {
+        for (Vehicle v : vehicles) {
+            v.setDriver(null);
+        }
+        for (Review r : reviews){
+            r.setDriver(null);
+        }
+    }
+
 }

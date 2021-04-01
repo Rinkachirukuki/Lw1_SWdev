@@ -45,4 +45,15 @@ public class Gender {
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
     }
+
+    @PreRemove
+    private void preRemove() {
+        for (Customer s : customers) {
+            s.setGender(null);
+        }
+        for (Driver s : drivers){
+            s.setGender(null);
+        }
+    }
+
 }

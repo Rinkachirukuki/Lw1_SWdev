@@ -34,7 +34,7 @@
 
             <td th:text="${tempVehicle.id}" />
             <td th:text="${tempVehicle.number}" />
-            <td th:text="${tempVehicle.mark.name}" />
+            <td th:text="${tempVehicle.mark} ? ${tempVehicle.mark.name} : 'Не указано'" />
             <td th:text="${tempVehicle.model}" />
             <td>
                 <a th:href="@{/vehicle/update (id=${tempVehicle.id})}"

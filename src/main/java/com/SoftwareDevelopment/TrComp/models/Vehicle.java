@@ -88,4 +88,11 @@ public class Vehicle {
             })
     private List<TaxiOrder> taxiOrders;
 
+    @PreRemove
+    private void preRemove() {
+        for (TaxiOrder s : taxiOrders) {
+            s.setVehicle(null);
+        }
+    }
+
 }

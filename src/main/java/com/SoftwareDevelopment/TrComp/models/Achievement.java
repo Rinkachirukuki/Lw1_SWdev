@@ -59,4 +59,11 @@ public class Achievement {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
+
+    @PreRemove
+    private void preRemove() {
+        for (Customer s : customers) {
+            s.getAchievements().remove(this);
+        }
+    }
 }

@@ -57,4 +57,11 @@ public class Privilege {
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
+
+    @PreRemove
+    private void preRemove() {
+        for (Customer s : customers) {
+            s.setGender(null);
+        }
+    }
 }
