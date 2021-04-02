@@ -123,8 +123,8 @@ public class Customer {
 
     @PreRemove
     private void preRemove() {
-        gender.getCustomers().remove(this);
-        privilege.getCustomers().remove(this);
+        if (gender != null) gender.getCustomers().remove(this);
+        if (privilege != null) privilege.getCustomers().remove(this);
         for (Achievement s : achievements){
             s.getCustomers().remove(this);
         }

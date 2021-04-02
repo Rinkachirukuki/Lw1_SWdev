@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Обновить информацию о клиенте</title>
+</head>
+
+<body>
+<div class="container">
+    <h3>Клиенты</h3>
+    <hr>
+
+    <p class="h4 mb-4">Обновить информацию о клиенте</p>
+
+    <form action="#" th:action="@{/customer/save}" th:object="${customer}"
+          method="POST">
+
+        <input type="hidden" th:field="*{id}">
+
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4"
+               placeholder="Фамилия" required>
+
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4"
+               placeholder="Имя" required>
+
+        <input type="text" th:field="*{patronymic}" class="form-control mb-4 col-4"
+               placeholder="Отчество" required>
+
+        <select class="form-control selectpicker mb-4 col-4" th:field="*{gender}" name="gender">
+            <option th:value='null'
+                    th:text="'Не указано'">
+            <option th:each="tempGender : ${genderList}"
+                    th:value="${tempGender.name}"
+                    th:text="${tempGender.name}">
+            </option>
+        </select>
+
+        <select class="form-control selectpicker mb-4 col-4" th:field="*{privilege}" name="privilege">
+            <option th:value='null'
+                    th:text="'Не указано'">
+            <option th:each="tempPrivilege : ${privilegeList}"
+                    th:value="${tempPrivilege.name}"
+                    th:text="${tempPrivilege.name}">
+            </option>
+        </select>
+
+
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Достижение</th>
+                <th>Описание</th>
+                <th>Действия</th>
+
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="tempAchievement : *{achievements}">
+
+                <td th:text="${tempAchievement.id}" />
+                <td th:text="${tempAchievement.name}" />
+                <td th:text="${tempAchievement.description}" />
+                <td>
+                    <a th:href="@{/customer/deleteAchievement (achievementId=${tempAchievement.id},customerId=*{id})}"
+                       class="btn btn-warning btn-sm"
+                       onclick="if (!(confirm('Лишить достижения?'))) return false">Лишить достижения</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/achievement/list (customerId = *{id})}">Добавить достижение</a>
+        <hr>
+
+        <button type="submit" class="btn btn-warning col-2">Сохранить</button>
+    </form>
+    <hr>
+    <a th:href="@{/customer/list}">К списку клиентов</a>
+</div>
+</body>
+
+</html>

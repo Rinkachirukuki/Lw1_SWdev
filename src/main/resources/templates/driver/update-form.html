@@ -32,6 +32,8 @@
                placeholder="Отчество" required>
 
         <select class="form-control selectpicker mb-4 col-4" th:field="*{gender}" name="gender">
+            <option th:value='null'
+                    th:text="'Не указано'">
             <option th:each="tempGender : ${genderList}"
                     th:value="${tempGender.name}"
                     th:text="${tempGender.name}">

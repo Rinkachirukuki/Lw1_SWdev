@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Список достижений</title>
+</head>
+<body>
+<div class="container">
+
+    <h3>Достижения</h3>
+    <hr>
+    <a th:href="@{/customer/add}"
+       class="btn btn-primary btn-sm mb-3"> Добавить достижение </a>
+    <br/>
+
+    <div th:text="${customer.lastName}">
+    </div>
+
+    <div th:text="${customer.firstName}">
+    </div>
+
+    <div th:text="${customer.patronymic}">
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Достижение</th>
+            <th>Описание</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempAchievement : ${achievementList}">
+
+            <td th:text="${tempAchievement.id}" />
+            <td th:text="${tempAchievement.name}" />
+            <td th:text="${tempAchievement.description}" />
+            <td>
+                <a th:href="@{/customer/addAchievement (customerId=${customer.id}, achievementId=${tempAchievement.id})}"
+                   class="btn btn-warning btn-sm">Добавить</a>
+                <a th:href="@{/achievement/customerList (achievementId=${tempAchievement.id})}"
+                   class="btn btn-warning btn-sm">Список клиентов</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <nav aria-label="Pagination" th:if="${achievementList.totalPages gt 0}">
+        <ul class="pagination justify-content-center font-weight-bold">
+
+            <li class="page-item" th:classappend="${achievementList.number eq 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/customer/achievementList (pageNumber=${achievementList.number lt 2 ? 1 : achievementList.number},pageSize=${achievementList.size})}"
+                   aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:classappend="${i eq achievementList.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, achievementList.totalPages, 1)}">
+                <a class="page-link" th:href="@{/customer/achievementList (pageNumber=${i},pageSize=${achievementList.size})}" th:text="${i}"
+                   th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${achievementList.number + 1 eq achievementList.totalPages} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/customer/achievementList (pageNumber=${achievementList.number + 2},pageSize=${achievementList.size})}"
+                   aria-label="Next" title="Next Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="container" align="right">
+        Записей на странице:
+        <a class="text-end" th:href="@{/customer/achievementList (pageNumber=${achievementList.number + 1}, pageSize=5)}"
+           th:text="5"></a>
+        <a class="text-end" th:href="@{/customer/achievementList (pageNumber=${achievementList.number + 1}, pageSize=10)}"
+           th:text="10"></a>
+        <a class="text-end" th:href="@{/customer/achievementList (pageNumber=${achievementList.number + 1}, pageSize=15)}"
+           th:text="15"></a>
+    </div>
+
+
+    <hr>
+    <a th:href="@{/}">В главное меню</a>
+
+
+</div>
+</body>
+</html>

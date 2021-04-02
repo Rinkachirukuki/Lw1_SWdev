@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+    <title>Список клиентов</title>
+</head>
+<body>
+<div class="container">
+
+    <h3>Клиенты</h3>
+    <hr>
+    <a th:href="@{/customer/add}"
+       class="btn btn-primary btn-sm mb-3"> Добавить клиента </a>
+    <br/>
+
+    <form action="#" th:action="@{/customer/list}" th:object="${customerQuery}"
+          method="GET">
+
+        <input type="text" th:field="${customerQuery.query}" class="form-control mb-4 col-4"
+               placeholder="Введите запрос" required>
+
+        <button type="submit" class="btn btn-warning col-2">Поиск</button>
+    </form>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Пол</th>
+            <th>Статус</th>
+            <th>Действия</th>
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempCustomer : ${customers}">
+
+            <td th:text="${tempCustomer.id}" />
+            <td th:text="${tempCustomer.lastName}" />
+            <td th:text="${tempCustomer.firstName}" />
+            <td th:text="${tempCustomer.patronymic}" />
+            <td th:text="${tempCustomer.gender} ? ${tempCustomer.gender.name} : 'Не указано'" />
+            <td th:text="${tempCustomer.privilege} ? ${tempCustomer.privilege.name} : 'Не указано'" />
+            <td>
+                <a th:href="@{/customer/update (id=${tempCustomer.id})}"
+                    class="btn btn-info btn-sm">Обновить</a>
+                <a th:href="@{/customer/delete (id=${tempCustomer.id})}"
+                   class="btn btn-warning btn-sm"
+                   onclick="if (!(confirm('Удалить?'))) return false">Удалить</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+
+    <nav aria-label="Pagination" th:if="${customers.totalPages gt 0}">
+        <ul class="pagination justify-content-center font-weight-bold">
+
+            <li class="page-item" th:classappend="${customers.number eq 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/customer/list (pageNumber=${customers.number lt 2 ? 1 : customers.number},pageSize=${customers.size})}"
+                   aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:classappend="${i eq customers.number + 1} ? 'active'"
+                th:each="i : ${#numbers.sequence( 1, customers.totalPages, 1)}">
+                <a class="page-link" th:href="@{/customer/list (pageNumber=${i},pageSize=${customers.size})}" th:text="${i}"
+                   th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${customers.number + 1 eq customers.totalPages} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/customer/list (pageNumber=${customers.number + 2},pageSize=${customers.size})}"
+                   aria-label="Next" title="Next Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="container" align="right">
+        Записей на странице:
+        <a class="text-end" th:href="@{/customer/list (pageNumber=${customers.number + 1}, pageSize=5)}"
+           th:text="5"></a>
+        <a class="text-end" th:href="@{/customer/list (pageNumber=${customers.number + 1}, pageSize=10)}"
+           th:text="10"></a>
+        <a class="text-end" th:href="@{/customer/list (pageNumber=${customers.number + 1}, pageSize=15)}"
+           th:text="15"></a>
+    </div>
+
+
+    <hr>
+    <a th:href="@{/}">В главное меню</a>
+
+
+</div>
+</body>
+</html>

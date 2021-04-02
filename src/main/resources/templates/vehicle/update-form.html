@@ -29,6 +29,8 @@
                placeholder="Модель" required>
 
         <select class="form-control selectpicker mb-4 col-4" th:field="*{mark}" name="mark">
+            <option th:value='null'
+                    th:text="'Не указано'">
             <option th:each="tempMark : ${markList}"
                     th:value="${tempMark.name}"
                     th:text="${tempMark.name}">
@@ -36,6 +38,8 @@
         </select>
 
         <select class="form-control selectpicker mb-4 col-4" th:field="*{driver}" name="driverId">
+            <option th:value='null'
+                    th:text="'Нет водителя'">
             <option th:each="tempDriver : ${driverList}"
                     th:value="${tempDriver.id}"
                     th:text="${tempDriver.toString()}">

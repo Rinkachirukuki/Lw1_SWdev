@@ -2,24 +2,24 @@
 <html xmlns:th = "http://www.thymeleaf.com" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text = "${title}"></title>
+    <title th:text = "'Меню'"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
 </head>
 <body>
-
-<form action="/add" form method="post">
-    <label for="number">number:</label>
-    <input type="text" id="number" name="number"><br><br>
-
-    <label for="model">model:</label>
-    <input type="text" id="model" name="model"><br><br>
-
-    <label for="mark">mark:</label>
-    <input type="text" id="mark" name="mark"><br><br>
-
-    <label for="garageId">garageId:</label>
-    <input type="text" id="garageId" name="garageId"><br><br>
-    <input type="submit" value="Submit">
-</form>
+<div class="container">
+    <h3>Меню</h3>
+    <hr>
+    <a th:href="@{/driver/list}"
+       class="btn btn-primary btn-sm mb-3"> Список водителей</a>
+    <br/>
+    <a th:href="@{/vehicle/list}"
+       class="btn btn-primary btn-sm mb-3"> Список автомобилей</a>
+    <br/>
+    <a th:href="@{/customer/list}"
+       class="btn btn-primary btn-sm mb-3"> Список клиентов</a>
+    <br/>
+    </div>
 </body>
 </html>
 
